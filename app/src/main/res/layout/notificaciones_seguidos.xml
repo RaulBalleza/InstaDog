@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#c20045">
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Nuevos seguidores"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="69dp">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="Desactivadas"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="Activadas"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="John Cena (john) comenzó a seguirte."
+            android:textStyle="italic"
+            android:textSize="11dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Solicitudes de seguimiento aceptadas"
+            android:textAllCaps="false"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="Desactivadas"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="Activadas"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:text="John Cena (john) aceptó tu solicitud."
+            android:textStyle="italic"
+            android:textSize="11dp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

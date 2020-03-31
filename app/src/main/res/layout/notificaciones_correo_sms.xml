@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:showText="false"
+            android:splitTrack="false"
+            android:textAllCaps="false"
+            android:textSize="13dp"
+            android:textStyle="italic"
+            android:text="Correos electrónicos de comentarios" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="11dp"
+            android:textStyle="italic"
+            android:text="Envía comentarios sobre InstaDog." />
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="Correos electrónicos de recordatorio" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textStyle="italic"
+            android:textSize="11dp"
+            android:text="Reciibe notificaciones que quizá te hayas perdido." />
+
+        <Switch
+            android:id="@+id/switch3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="Correos electrónicos de producto" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textStyle="italic"
+            android:textSize="11dp"
+            android:text="Recibe consejos sobre las herramientas de InstaDog." />
+
+        <Switch
+            android:id="@+id/switch4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="Correos electrónicos de noticias" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="11dp"
+            android:textStyle="italic"
+            android:text="Descubre las nuevas funciones de InstaDog." />
+
+        <Switch
+            android:id="@+id/switch5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="Mensajes de texto (SMS)" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="11dp"
+            android:textStyle="italic"
+            android:text="Recibe notificaciones por mensaje de texto." />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

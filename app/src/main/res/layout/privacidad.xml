@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="Interacciones"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <Button
+            android:id="@+id/buttonComentarios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/realimentacion"
+            android:text="    Comentarios"
+            android:textAlignment="viewStart"
+            android:textStyle="italic"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonEtiquetas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/contacto"
+            android:text="    Etiquetas"
+            android:textAlignment="viewStart"
+            android:textStyle="italic"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/usuario"
+            android:text="    Estado de actividad"
+            android:textAlignment="viewStart"
+            android:textStyle="italic"
+            android:textAllCaps="false" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="?android:attr/listDivider"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="Conexiones"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/buttonPrivacidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/contrasena"
+            android:text="    Privacidad de la cuenta"
+            android:textAlignment="viewStart"
+            android:textStyle="italic"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonBloqueadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/cerrar"
+            android:text="    Cuentas bloqueadas"
+            android:textAlignment="viewStart"
+            android:textStyle="italic"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonSilenciadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/alarma"
+            android:text="    Cuentas silenciadas"
+            android:textAlignment="viewStart"
+            android:textStyle="italic"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonMejores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/estrella"
+            android:text="    Mejores amigos"
+            android:textAlignment="viewStart"
+            android:textStyle="italic"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonSigues"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/grupo"
+            android:text="    Cuentas que sigues"
+            android:textAlignment="viewStart"
+            android:textStyle="italic"
+            android:textAllCaps="false" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

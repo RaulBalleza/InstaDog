@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#c20045">
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Me gusta"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="106dp">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/textViewOtro"
+                android:layout_alignStart="@+id/textViewOtro"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="Desactivadas"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/textViewOtro"
+                android:layout_alignStart="@+id/textViewOtro"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="De personas a las que sigo"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/textViewOtro"
+                android:layout_alignStart="@+id/textViewOtro"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="De todos"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:text="A john le gustó tu foto."
+            android:textStyle="italic"
+            android:textSize="11dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Comentarios"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="106dp">
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/textViewOtro"
+                android:layout_alignStart="@+id/textViewOtro"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="Desactivadas"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/textViewOtro"
+                android:layout_alignStart="@+id/textViewOtro"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="De personas a las que sigo"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+
+            <RadioButton
+                android:id="@+id/radioButton6"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/textViewOtro"
+                android:layout_alignStart="@+id/textViewOtro"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="30dp"
+                android:text="De todos"
+                android:textStyle="italic"
+                android:textSize="12dp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:text="A john le comentó tu foto."
+            android:textStyle="italic"
+            android:textSize="11dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

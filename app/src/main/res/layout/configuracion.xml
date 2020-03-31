@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#c20045">
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:drawableLeft="@drawable/buscar"
+            android:ems="10"
+            android:hint="  Buscar"
+            android:inputType="textPersonName"
+            android:textColorHighlight="#000000"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/buttonNotificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/alerta"
+            android:text="    Notificaciones"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonPrivacidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/contrasena"
+            android:text="    Privacidad"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonSeguridad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:backgroundTint="#FFFFFF"
+            android:drawableLeft="@drawable/proteger"
+            android:text="    Seguridad"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonInformación"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:backgroundTint="#FFFFFF"
+            android:drawableLeft="@drawable/error"
+            android:text="    Información"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonSalir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:backgroundTint="#FFFFFF"
+            android:drawableLeft="@drawable/cerrar_sesion"
+            android:text="    Salir"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
