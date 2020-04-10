@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#00bcd4"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/feed_post_profile_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/foto_perfil" />
+
+        <TextView
+            android:id="@+id/feed_post_username_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="60dp"
+            android:text="USERNAME"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/feed_post_btn_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/feed_post_image_post"
+        android:layout_width="match_parent"
+        android:layout_height="275dp"
+        app:srcCompat="@drawable/photo" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp">
+
+        <ImageView
+            android:id="@+id/feed_post_btn_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            app:srcCompat="@drawable/ic_thumb_up_24" />
+
+        <ImageView
+            android:id="@+id/feed_post_btn_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            app:srcCompat="@drawable/ic_comment_24" />
+
+        <ImageView
+            android:id="@+id/feed_post_btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_share_24"
+            android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/feed_post_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textColor="@android:color/white"
+            android:text="123,456,789 likes" />
+
+        <TextView
+            android:id="@+id/feed_post_username_and_caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:textColor="@android:color/white"
+            android:text="Username SHARING WITH U MY BREAKSFAST" />
+    </RelativeLayout>
+
+</LinearLayout>
