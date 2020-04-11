@@ -40,13 +40,13 @@
                 android:backgroundTint="#80646464">
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName"
+                    android:id="@+id/editTextUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:ems="10"
                     android:focusedByDefault="true"
-                    android:hint="Username"
+                    android:hint="Correo electrónico"
                     android:inputType="textPersonName"
                     android:selectAllOnFocus="true"
                     android:textColor="#FFFFFF"
@@ -63,23 +63,15 @@
                 android:background="@android:color/white"
                 android:backgroundTint="#80646464">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <EditText
+                    android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:passwordToggleEnabled="true"
-                    android:textColorHint="#80FFFFFF"
-                    >
-
-                    <EditText
-                        android:id="@+id/editTextTextPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:gravity="top|center_vertical"
-                        android:hint="Password"
-                        android:inputType="textPassword"
-                        android:textColorHint="#80FFFFFF" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_centerInParent="true"
+                    android:ems="10"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:textColorHint="#80FFFFFF" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -98,7 +90,7 @@
                     android:layout_height="60dp"
                     android:background="#00FFFFFF"
                     android:backgroundTint="#00FFFFFF"
-                    android:text="Log In"
+                    android:text="Iniciar sesión"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
             </RelativeLayout>
@@ -126,16 +118,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical|right"
-            android:text="Don´t have an account? "
+            android:text="¿No tienes una cuenta aún? "
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/textViewRegister"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="Sign up."
+            android:text="Regístrate."
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold" />
