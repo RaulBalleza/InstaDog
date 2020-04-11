@@ -61,4 +61,10 @@ public class FeedActivity extends AppCompatActivity {
         feedRecyclerAdapter = new FeedRecyclerAdapter(FeedPosts);
         recyclerView.setAdapter(feedRecyclerAdapter);
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
 }

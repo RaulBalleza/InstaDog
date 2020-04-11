@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "353643277032",
+    "firebase_url": "https://lovepaws-e81c4.firebaseio.com",
+    "project_id": "lovepaws-e81c4",
+    "storage_bucket": "lovepaws-e81c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353643277032:android:747849e0b84d7ac59d375d",
+        "android_client_info": {
+          "package_name": "tech.rauballeza.instadog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353643277032-8f25bjscp4hgefh49me5jdiu08l22ho2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.rauballeza.instadog",
+            "certificate_hash": "79ab777b9dc621cbc8b0d230c6e9d7cd35abc309"
+          }
+        },
+        {
+          "client_id": "353643277032-q6c8gq2f5iupr4v4shuvc648a1d5tfaj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.rauballeza.instadog",
+            "certificate_hash": "9307ad6f2642e0df5821571b3863b8cf3e9b5c43"
+          }
+        },
+        {
+          "client_id": "353643277032-4fjvm7fuk3ljceijpsnd02ghrkucupt4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa9YExlHKvxIRAdmXpKRBqUdriDpHA7w8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353643277032-4fjvm7fuk3ljceijpsnd02ghrkucupt4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
