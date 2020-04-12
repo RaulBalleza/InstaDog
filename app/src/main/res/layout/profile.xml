@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/addpost_btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignWithParentIfMissing="true"
@@ -26,7 +26,7 @@
             app:srcCompat="@drawable/back" />
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/profile_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -34,14 +34,14 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/imageView20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+        <Button
+            android:id="@+id/btn_more"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_exit_to_app_24" />
+
 
     </RelativeLayout>
 
@@ -57,7 +57,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/iv_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
             app:srcCompat="@drawable/foto_perfil" />
@@ -83,7 +83,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView36"
+                    android:id="@+id/tv_posts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -112,7 +112,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView33"
+                    android:id="@+id/tv_follows"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -141,7 +141,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView34"
+                    android:id="@+id/tv_followers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

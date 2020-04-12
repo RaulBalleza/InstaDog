@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".AddPostActivity"/>
     </application>
 
 </manifest>
