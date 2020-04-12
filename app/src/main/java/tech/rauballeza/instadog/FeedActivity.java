@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,8 @@ public class FeedActivity extends AppCompatActivity {
     FeedRecyclerAdapter feedRecyclerAdapter;
     RecyclerView.LayoutManager layoutManager;
 
+    //Firebase auth
+    FirebaseAuth firebaseAuth;
 
     private ArrayList<FeedPost> FeedPosts = new ArrayList<FeedPost>();
 
@@ -27,7 +31,7 @@ public class FeedActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -60,5 +64,21 @@ public class FeedActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         feedRecyclerAdapter = new FeedRecyclerAdapter(FeedPosts);
         recyclerView.setAdapter(feedRecyclerAdapter);
+    }
+
+    private void checkUserStatus(){
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null){
+
+        }else{
+            startActivity(new Intent(FeedActivity.this, MainActivity.class));
+            finish();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        checkUserStatus();
+        super.onStart();
     }
 }
