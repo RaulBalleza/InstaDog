@@ -6,6 +6,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,28 +33,8 @@ public class FeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed);
         firebaseAuth = FirebaseAuth.getInstance();
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.home);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.home:
-                        return true;
-                    case R.id.search_button:
-                        return true;
-                    case R.id.upload:
-                        return true;
-                    case R.id.likes:
-                        return true;
-                    case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
-            }
-        });
+
+
         FeedPost fp1 = new FeedPost("RaulBalleza", "Chiaquiles", 1234, R.drawable.photo, R.drawable.steve);
         FeedPost fp2 = new FeedPost("FernandaBalleza", "Machimito", 10000000, R.drawable.photo, R.drawable.steve);
         FeedPosts.add(fp1);
@@ -66,11 +47,11 @@ public class FeedActivity extends AppCompatActivity {
         recyclerView.setAdapter(feedRecyclerAdapter);
     }
 
-    private void checkUserStatus(){
+    private void checkUserStatus() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null){
+        if (user != null) {
 
-        }else{
+        } else {
             startActivity(new Intent(FeedActivity.this, MainActivity.class));
             finish();
         }

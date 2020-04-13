@@ -61,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
     //Path where images of user profile and cover will be stored
     String storagePath = "Users_Profile_Cover_Imgs/";
 
-    ImageView avatarIv, coverIv,btn_more;
+    ImageView avatarIv, coverIv, btn_more;
     TextView nameTv, emailTv, phoneTv;
     FloatingActionButton fab;
 
@@ -110,8 +110,8 @@ public class ProfileActivity extends AppCompatActivity {
         layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        profileRecyclerAdapter = new ProfileRecyclerAdapter(posts);
-        recyclerView.setAdapter(profileRecyclerAdapter);
+        //profileRecyclerAdapter = new ProfileRecyclerAdapter();
+        //recyclerView.setAdapter(profileRecyclerAdapter);
 
         //Init views
         avatarIv = findViewById(R.id.avatarIv);
@@ -165,14 +165,14 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        btn_more = findViewById(R.id.btn_more);
+        /*btn_more = findViewById(R.id.btn_more);
         btn_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
                 checkUserStatus();
             }
-        });
+        });*/
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.profile);

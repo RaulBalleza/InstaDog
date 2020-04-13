@@ -9,11 +9,15 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 public class ProfileRecyclerAdapter extends RecyclerView.Adapter<ProfileRecyclerAdapter.ImageViewHolder> {
 
-    private int[] posts;
+    private List<ModelPost> posts;
 
-    public ProfileRecyclerAdapter(int[] posts) {
+    public ProfileRecyclerAdapter(List<ModelPost> posts) {
         this.posts = posts;
     }
 
@@ -27,12 +31,15 @@ public class ProfileRecyclerAdapter extends RecyclerView.Adapter<ProfileRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        holder.post.setImageResource(posts[position]);
+        String pImage = posts.get(position).getpImage();
+        //holder.post.setImageResource(Integer.parseInt(posts.get(position).pImage));
+        Picasso.get().load(pImage).into(holder.post);
+
     }
 
     @Override
     public int getItemCount() {
-        return posts.length;
+        return posts.size();
     }
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder {

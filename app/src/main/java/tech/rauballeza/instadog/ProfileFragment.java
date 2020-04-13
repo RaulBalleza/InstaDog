@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -24,6 +27,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -47,7 +52,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -73,6 +81,8 @@ public class ProfileFragment extends Fragment {
     //    Dialogo de progreso
     ProgressDialog pd;
 
+    ActionBar actionBar;
+
     //Constantes de permisos
     private static final int CAMERA_REQUEST_CODE = 100;
     private static final int STORAGE_REQUEST_CODE = 200;
@@ -88,20 +98,14 @@ public class ProfileFragment extends Fragment {
     //For checking profile or cover photo
     String profileOrCoverPhoto;
 
-    private int[] posts = {
-            R.drawable.steve, R.drawable.steve, R.drawable.steve,
-            R.drawable.steve, R.drawable.steve, R.drawable.steve,
-            R.drawable.steve, R.drawable.steve, R.drawable.steve,
-            R.drawable.steve, R.drawable.steve, R.drawable.steve,
-            R.drawable.steve, R.drawable.steve, R.drawable.steve,
-            R.drawable.steve, R.drawable.steve, R.drawable.steve};
+    List<ModelPost> postList;
 
-    public ProfileFragment(){
+    public ProfileFragment() {
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.profile, container, false);
 
@@ -112,6 +116,13 @@ public class ProfileFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference("Users");
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        postList = new ArrayList<>();
+        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle(user.getEmail());
+        /*Activando botón de retroceso.
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);*/
+
         //Init array permissions
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -120,26 +131,45 @@ public class ProfileFragment extends Fragment {
         layoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        profileRecyclerAdapter = new ProfileRecyclerAdapter(posts);
-        recyclerView.setAdapter(profileRecyclerAdapter);
 
         //Init views
         avatarIv = view.findViewById(R.id.avatarIv);
         //coverIv = view.findViewById(R.id.coverIv);
-        nameTv = view.findViewById(R.id.nameTv);
+        //nameTv = view.findViewById(R.id.nameTv);
         //emailTv = view.findViewById(R.id.emailTv);
         //phoneTv = view.findViewById(R.id.phoneTv);
-        //fab = view.findViewById(R.id.fab);
+        fab = view.findViewById(R.id.fab);
 
         //Innit progress dialog
         pd = new ProgressDialog(getActivity());
+
+        DatabaseReference postimg = FirebaseDatabase.getInstance().getReference("Posts");
+        Query imagenes_post = postimg.orderByChild("uid").equalTo(user.getUid());
+        imagenes_post.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    ModelPost myPosts = ds.getValue(ModelPost.class);
+                    postList.add(myPosts);
+
+                    profileRecyclerAdapter = new ProfileRecyclerAdapter(postList);
+                    recyclerView.setAdapter(profileRecyclerAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Check until requiered data get
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String name = "" + ds.child("name").getValue();
                     String email = "" + ds.child("email").getValue();
                     String phone = "" + ds.child("phone").getValue();
@@ -147,24 +177,24 @@ public class ProfileFragment extends Fragment {
                     String cover = "" + ds.child("cover").getValue();
 
                     //Set data
-                    nameTv.setText(name);
+                    //nameTv.setText(name);
                     //emailTv.setText(email);
                     //phoneTv.setText(phone);
-                    try{
+                    try {
                         //If image is received then set
                         Picasso.get().load(image).into(avatarIv);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         //if there is any exception while getting image then set default
                         Picasso.get().load(R.drawable.ic_add_a_photo_black_24dp).into(avatarIv);
                     }
 
-                    try{
+                    /*try {
                         //If image is received then set
                         Picasso.get().load(cover).into(coverIv);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         //if there is any exception while getting image then set default
-                        Picasso.get().load(R.drawable.ic_add_a_photo_black_24dp).into(avatarIv);
-                    }
+                        Picasso.get().load(R.drawable.ic_add_a_photo_black_24dp).into(coverIv);
+                    }*/
                 }
             }
 
@@ -186,7 +216,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    private boolean checkStoragePermission(){
+    private boolean checkStoragePermission() {
         //Check if storage permission is enable or not
         //return 1 if enabled
         //return 2 if not enabled
@@ -194,12 +224,13 @@ public class ProfileFragment extends Fragment {
                 == (PackageManager.PERMISSION_DENIED);
         return result;
     }
-    private void requestStoragePermission(){
+
+    private void requestStoragePermission() {
         //request runtime storage permission
         requestPermissions(storagePermissions, STORAGE_REQUEST_CODE);
     }
 
-    private boolean checkCameraPermission(){
+    private boolean checkCameraPermission() {
         //Check if storage permission is enable or not
         //return 1 if enabled
         //return 2 if not enabled
@@ -211,11 +242,11 @@ public class ProfileFragment extends Fragment {
 
         return result && result1;
     }
-    private void requestCameraPermission(){
+
+    private void requestCameraPermission() {
         //request runtime storage permission
         requestPermissions(cameraPermissions, STORAGE_REQUEST_CODE);
     }
-
 
 
     private void showEditProfileDialog() {
@@ -227,7 +258,7 @@ public class ProfileFragment extends Fragment {
          * */
 
         //Options to show in dialog
-        String options[] = {"Editar foto de perfil", "Editar foto de portada", "Editar nombre", "Editar teléfono"};
+        String options[] = {"Editar foto de perfil"};//, "Editar foto de portada", "Editar nombre", "Editar teléfono"};
         //Dialogo de alerta
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //Set titulo
@@ -236,7 +267,7 @@ public class ProfileFragment extends Fragment {
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch(which){
+                switch (which) {
                     case 0:
                         //Ediar Foto de perfil click
                         pd.setMessage("Actualización de imagen de perfil");
@@ -293,7 +324,7 @@ public class ProfileFragment extends Fragment {
                 //input text from edit text
                 String value = editText.getText().toString().trim();
                 //validate if user has entered something or not
-                if(!TextUtils.isEmpty(value)){
+                if (!TextUtils.isEmpty(value)) {
                     pd.show();
                     HashMap<String, Object> result = new HashMap<>();
                     result.put(key, value);
@@ -308,10 +339,10 @@ public class ProfileFragment extends Fragment {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             pd.dismiss();
-                            Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-                }else{
+                } else {
                     Toast.makeText(getActivity(), "Please enter " + key, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -340,20 +371,20 @@ public class ProfileFragment extends Fragment {
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch(which){
+                switch (which) {
                     case 0:
                         //Click camara
-                        if(!checkCameraPermission()){
+                        if (!checkCameraPermission()) {
                             requestCameraPermission();
-                        }else{
+                        } else {
                             pickFromCamera();
                         }
                         break;
                     case 1:
                         //Seleccion de galeria
-                        if(!checkStoragePermission()){
+                        if (!checkStoragePermission()) {
                             requestStoragePermission();
-                        }else{
+                        } else {
                             pickFromGallery();
                         }
                         break;
@@ -368,30 +399,30 @@ public class ProfileFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         /*This method called when user press Allow or Deny from permission request dialog
          * here we will handle permission cases (allowed & denied)*/
-        switch (requestCode){
-            case CAMERA_REQUEST_CODE:{
+        switch (requestCode) {
+            case CAMERA_REQUEST_CODE: {
                 //Picking rom camera, first check if camera and storage permissions allowed or not
-                if(grantResults.length > 0){
+                if (grantResults.length > 0) {
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if(cameraAccepted && writeStorageAccepted){
+                    if (cameraAccepted && writeStorageAccepted) {
                         //Permissions enabled
                         pickFromCamera();
-                    }else{
+                    } else {
                         //permisions denied
                         Toast.makeText(getActivity(), "Habilite la cámara y el permiso de almacenamiento.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
             break;
-            case STORAGE_REQUEST_CODE:{
+            case STORAGE_REQUEST_CODE: {
                 //Picking from gallery, first check if storage permissions allowed or not
-                if(grantResults.length > 0){
+                if (grantResults.length > 0) {
                     boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if(writeStorageAccepted){
+                    if (writeStorageAccepted) {
                         //Permissions enabled
                         pickFromGallery();
-                    }else{
+                    } else {
                         //permisions denied
                         Toast.makeText(getActivity(), "Habilite el permiso de almacenamiento.", Toast.LENGTH_SHORT).show();
                     }
@@ -405,13 +436,13 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         /*This methow will be called after picking image from camera or gallery*/
-        if(resultCode == RESULT_OK){
-            if(requestCode == IMAGE_PICK_GALLERY_CODE){
+        if (resultCode == RESULT_OK) {
+            if (requestCode == IMAGE_PICK_GALLERY_CODE) {
                 //image is picked from gallery, get uri of image
                 image_uri = data.getData();
                 uploadProfileCoverPhoto(image_uri);
             }
-            if(requestCode == IMAGE_PICK_CAMERA_CODE){
+            if (requestCode == IMAGE_PICK_CAMERA_CODE) {
                 //image is picked from camera, get uri of image
                 uploadProfileCoverPhoto(image_uri);
             }
@@ -433,11 +464,11 @@ public class ProfileFragment extends Fragment {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 //Image is uploaded to storage, now get it's url and store in user's database
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isSuccessful());
+                while (!uriTask.isSuccessful()) ;
                 Uri downloadUri = uriTask.getResult();
 
                 //Check if image is uploaded or not and uri is received
-                if(uriTask.isSuccessful()){
+                if (uriTask.isSuccessful()) {
                     //Image uploaded
                     HashMap<String, Object> results = new HashMap<>();
                     results.put(profileOrCoverPhoto, downloadUri.toString());
@@ -456,7 +487,7 @@ public class ProfileFragment extends Fragment {
                             Toast.makeText(getActivity(), "Error al cargar imagen...", Toast.LENGTH_SHORT).show();
                         }
                     });
-                }else{
+                } else {
                     pd.dismiss();
                     Toast.makeText(getActivity(), "Ha ocurrido algun error", Toast.LENGTH_SHORT).show();
                 }
@@ -497,5 +528,42 @@ public class ProfileFragment extends Fragment {
     //Primero checamos las reglas del firebase storage
 
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        Objects.requireNonNull(getActivity()).getMenuInflater().inflate(R.menu.profile_more, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.log_out:
+                firebaseAuth.signOut();
+                checkUserStatus();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void checkUserStatus() {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+
+        } else {
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        checkUserStatus();
+        super.onStart();
+    }
 }
