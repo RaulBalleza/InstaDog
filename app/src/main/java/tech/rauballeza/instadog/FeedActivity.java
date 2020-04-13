@@ -43,8 +43,6 @@ public class FeedActivity extends AppCompatActivity {
                     case R.id.search_button:
                         return true;
                     case R.id.upload:
-                        startActivity(new Intent(getApplicationContext(), AddPostActivity.class));
-                        overridePendingTransition(0,0);
                         return true;
                     case R.id.likes:
                         return true;
