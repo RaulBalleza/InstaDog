@@ -56,11 +56,16 @@
         app:layout_constraintTop_toBottomOf="@+id/header">
 
 
-        <ImageView
-            android:id="@+id/iv_photo"
+        <RelativeLayout
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:srcCompat="@drawable/foto_perfil" />
+            android:layout_height="80dp">
+
+            <ImageView
+                android:id="@+id/iv_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/foto_perfil" />
+        </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout5"
@@ -87,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="50"
+                    android:text="0"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -116,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="100"
+                    android:text="0"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -145,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="500"
+                    android:text="0"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 

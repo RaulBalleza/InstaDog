@@ -62,8 +62,8 @@
 
             <ImageView
                 android:id="@+id/iv_post"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 app:srcCompat="@drawable/ic_image_search_24" />
         </RelativeLayout>

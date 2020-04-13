@@ -23,14 +23,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
     // Date components
-    private int mYear,mMonth,mDay;
+    private int mYear, mMonth, mDay;
 
     // Views
     EditText editTextNombre, editTextApellidos, editTextTelefono, editTextEmail, editTextPassword;
@@ -133,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Handle register btn click
         btnRegistrar = findViewById(R.id.buttonRegister);
 
-        btnRegistrar.setOnClickListener(new View.OnClickListener(){
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Input fields
@@ -146,28 +149,23 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = editTextPassword.getText().toString().trim();
 
                 // Validate
-                if ( !Patterns.EMAIL_ADDRESS.matcher(email).matches() ){
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     // Set error and focus to email EditText
                     editTextEmail.setError("Email inválido");
                     editTextEmail.setFocusable(true);
-                }
-                else if( password.length()<6 ){
+                } else if (password.length() < 6) {
                     editTextPassword.setError("Contraseña inválida. Asegúrate de escribir por lo menos 6 caracteres");
                     editTextPassword.setFocusable(true);
-                }
-                else if( nombre.length()<2 ){
+                } else if (nombre.length() < 2) {
                     editTextNombre.setError("Nombre inválido. Asegúrate de escribir por lo menos 2 caracteres");
                     editTextNombre.setFocusable(true);
-                }
-                else if( apellido.length()<6 ){
+                } else if (apellido.length() < 6) {
                     editTextApellidos.setError("Apellido inválido. Asegúrate de escribir por lo menos 2 caracteres");
                     editTextApellidos.setFocusable(true);
-                }
-                else if( !Patterns.PHONE.matcher(telefono).matches() ){
+                } else if (!Patterns.PHONE.matcher(telefono).matches()) {
                     editTextTelefono.setError("Número telefónico inválido.");
                     editTextTelefono.setFocusable(true);
-                }
-                else {
+                } else {
 
                     registerUser(nombre, apellido, telefono, fechaNac, genero, email, password);
                 }
@@ -175,7 +173,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String nombre, String apellido, String telefono, String fechaNac, String genero, String email, String password) {
+    private void registerUser(final String nombre, final String apellido, final String telefono, final String fechaNac, final String genero, String email, String password) {
         // Show progress dialog
         progressDialog.show();
 
@@ -187,7 +185,25 @@ public class RegisterActivity extends AppCompatActivity {
                             // Sign in success, dismiss dialog and start register activity
                             progressDialog.dismiss();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(RegisterActivity.this, "Usuario registrado...\n"+user.getEmail(), Toast.LENGTH_SHORT).show();
+                            String email = user.getEmail();
+                            String uid = user.getUid();
+                            String username = nombre+apellido;
+                            HashMap<Object, String> hashMap = new HashMap<>();
+
+                            hashMap.put("email", email);
+                            hashMap.put("uid", uid);
+                            hashMap.put("name", nombre + " " + apellido);
+                            hashMap.put("username", username);
+                            hashMap.put("phone", telefono);
+                            hashMap.put("gender", genero);
+                            hashMap.put("date_of_birth", fechaNac);
+                            hashMap.put("image", "");//Se pone en editar perfil
+
+                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                            DatabaseReference reference = firebaseDatabase.getReference("Users");
+                            reference.child(uid).setValue(hashMap);
+
+                            Toast.makeText(RegisterActivity.this, "Usuario registrado...\n" + user.getEmail(), Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                             finish();
                         } else {
@@ -204,14 +220,14 @@ public class RegisterActivity extends AppCompatActivity {
                 // Error, dismiss progress dialog and get and show a message to the user
                 progressDialog.dismiss();
 
-                Toast.makeText(RegisterActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         onBackPressed(); // Va a la actitivity anterior
         return super.onSupportNavigateUp();
     }

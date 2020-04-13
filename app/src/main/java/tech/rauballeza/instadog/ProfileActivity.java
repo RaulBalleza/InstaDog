@@ -18,6 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -25,8 +32,14 @@ public class ProfileActivity extends AppCompatActivity {
     ProfileRecyclerAdapter profileRecyclerAdapter;
     RecyclerView.LayoutManager layoutManager;
     Button btn_more;
-    FirebaseAuth firebaseAuth;
     TextView username;
+    ImageView avatar;
+
+    //Firebase
+    FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+    FirebaseUser firebaseUser;
+    DatabaseReference databaseReference;
 
     private int[] posts = {
             R.drawable.steve, R.drawable.steve, R.drawable.steve,
@@ -53,10 +66,36 @@ public class ProfileActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         profileRecyclerAdapter = new ProfileRecyclerAdapter(posts);
         recyclerView.setAdapter(profileRecyclerAdapter);
+
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
 
         username = findViewById(R.id.profile_user);
-        username.setText(firebaseAuth.getCurrentUser().getEmail());
+        avatar = findViewById(R.id.iv_photo);
+
+        Query query = databaseReference.orderByChild("email").equalTo(firebaseUser.getEmail());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String _username = "" + ds.child("username").getValue();
+                    String _image = "" + ds.child("image").getValue();
+                    username.setText(_username);
+                    try {
+                        Picasso.get().load(_image).into(avatar);
+                    } catch (Exception e) {
+                        Picasso.get().load(R.drawable.foto_perfil).into(avatar);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         btn_more = findViewById(R.id.btn_more);
         btn_more.setOnClickListener(new View.OnClickListener() {
@@ -72,16 +111,16 @@ public class ProfileActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), FeedActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.search_button:
                         return true;
                     case R.id.upload:
                         startActivity(new Intent(getApplicationContext(), AddPostActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.likes:
                         return true;
@@ -94,11 +133,11 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void checkUserStatus(){
+    private void checkUserStatus() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null){
+        if (user != null) {
 
-        }else{
+        } else {
             startActivity(new Intent(ProfileActivity.this, MainActivity.class));
             finish();
         }
